@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@700;900&display=swap');
+
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* глобальный фон для всего сайта */
+body, html {
+  font-family: 'Inter', sans-serif;
+  color: white;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+
+  /* красивый динамичный фон */
+  background: radial-gradient(circle at top left, #1a2a6c, #b21f1f, #762dfd);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* анимация плавного смещения градиента */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* Контейнеры и секции остаются прозрачными, чтобы фон был виден */
+.container, .section, .hero, .about-grid, .grid {
+  background: transparent;
+}
+
+/* Чтобы все тексты, карточки и видео/картинки выделялись на фоне */
+.card {
+  background: rgba(0,0,0,0.3);
+}
+
+.hero-video, .hero-side, .about-img-container {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+
+
+/* контейнер */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* секции */
+.section {
+  padding: 100px 0;
+}
+
+/* заголовки */
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+/* сетка */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* карточки */
+.card {
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none; /* убирает белую рамку при фокусе */
+  border: none;  /* на всякий случай */
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+    border-radius: 18px;           /* чтобы картинка не вылезала за скругления */
+
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.card, .card img, .card a {
+  outline: none; /* убирает белую рамку при фокусе */
+  border: none;  /* на всякий случай */
+}
+
+
+/* hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #1e3c72 0%, transparent 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 1.125rem;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+/* видео + боковые картинки */
+.hero-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* центральное видео */
+.hero-video {
+  width: 400px;
+  max-width: 45%;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* боковые картинки */
+.hero-side {
+  width: 150px;
+  max-width: 20%;
+  border-radius: 24px;
+  filter: blur(2px);
+  object-fit: cover;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.hero-side:hover {
+  transform: scale(1.05);
+}
+
+/* адаптив hero */
+@media(max-width: 900px) {
+  .hero-media {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .hero-side {
+    display: none;
+  }
+  .hero-video {
+    width: 90%;
+  }
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 72px;
+  backdrop-filter: blur(12px);
+  background: rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  z-index: 40;
+}
+
+.navbar h1 {
+  margin-left: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: white;
+}
+
+/* гамбургер */
+.hamburger {
+  width: 24px;
+  height: 2px;
+  background: white;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+.hamburger::before { top: -8px; }
+.hamburger::after { top: 8px; }
+
+/* SideMenu */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.5);
+  z-index: 49;
+}
+
+.sidemenu {
+  width: 280px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(72, 0, 105, 0.95), rgba(74, 0, 88, 0.95));
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  box-shadow: -8px 0 20px rgba(0,0,0,0.5);
+}
+
+.sidemenu button {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color 0.2s ease;
+}
+
+.sidemenu button:hover {
+  color: #ff3d00;
+}
+
+.sidemenu a {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sidemenu a:hover {
+  color: #ff7a18;
+}
+
+/* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media(min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.about-img-container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.about-text p {
+  color: #ccc;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* Gallery modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+}
